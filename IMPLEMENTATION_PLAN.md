@@ -135,22 +135,22 @@ Parsing de planilhas em Web Worker para não travar a UI.
 
 Interface de upload com drag-and-drop.
 
-- [ ] `src/components/ui/Dropzone.tsx`
-  - [ ] Área de drag-and-drop com visual feedback (border, ícone, texto)
-  - [ ] Suporte a clique para abrir file picker
-  - [ ] Validação de formato (`.csv`, `.xlsx`, `.xls`)
-  - [ ] Validação de tamanho máximo
-  - [ ] Estado visual: idle, dragover, error, processing
-- [ ] `src/components/steps/FileUpload.tsx`
-  - [ ] Renderiza `Dropzone`
-  - [ ] Ao receber arquivo: chama `parseFile` via hook
-  - [ ] Mostra progresso do parsing
-  - [ ] Em caso de sucesso: salva resultado na store e avança para step `mapping`
-  - [ ] Em caso de erro: mostra mensagem descritiva
-- [ ] **Teste**: `src/components/steps/__tests__/FileUpload.test.tsx`
-  - [ ] Renderiza dropzone
-  - [ ] Rejeita formatos inválidos
-  - [ ] Rejeita arquivos acima do tamanho máximo
+- [x] `src/components/ui/Dropzone.tsx`
+  - [x] Área de drag-and-drop com visual feedback (border, ícone, texto)
+  - [x] Suporte a clique para abrir file picker
+  - [x] Validação de formato (`.csv`, `.xlsx`, `.xls`)
+  - [x] Validação de tamanho máximo
+  - [x] Estado visual: idle, dragover, error, processing
+- [x] `src/components/steps/FileUpload.tsx`
+  - [x] Renderiza `Dropzone`
+  - [x] Ao receber arquivo: chama `parseFile` via hook
+  - [x] Mostra progresso do parsing
+  - [x] Em caso de sucesso: salva resultado na store e avança para step `mapping`
+  - [x] Em caso de erro: mostra mensagem descritiva
+- [x] **Teste**: `src/components/steps/__tests__/FileUpload.test.tsx`
+  - [x] Renderiza dropzone
+  - [x] Rejeita formatos inválidos
+  - [x] Rejeita arquivos acima do tamanho máximo
 
 ---
 
