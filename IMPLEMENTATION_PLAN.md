@@ -210,40 +210,40 @@ Interface para mapear colunas fonte → colunas alvo.
 
 Validação em background com feedback visual.
 
-- [ ] `src/lib/type-coercion.ts`
-  - [ ] `coerceToNumber(value)`: string → number, lidar com vírgula decimal pt-BR
-  - [ ] `coerceToDate(value)`: string → Date, múltiplos formatos (DD/MM/YYYY, YYYY-MM-DD, etc.)
-  - [ ] `coerceToBoolean(value)`: "sim"/"não", "yes"/"no", "true"/"false", "1"/"0"
-- [ ] `src/lib/validator.ts`
-  - [ ] Validators built-in: required, regex, min, max, minLength, maxLength, enum
-  - [ ] Suporte a `validate` custom function
-  - [ ] Type checking com coerção
-  - [ ] Orquestração: envia dados em chunks para o Worker, agrega resultados
-- [ ] `src/workers/validator.worker.ts`
-  - [ ] Recebe chunk de linhas + schema (TargetColumn[]) + mappings
-  - [ ] Aplica validators por célula
-  - [ ] Retorna `ValidationIssue[]` + progresso
-- [ ] `src/hooks/use-validator.ts`
-  - [ ] Hook: `validate()`, `isValidating`, `progress`, `result`
-- [ ] `src/components/ui/ValidationTable.tsx`
-  - [ ] Tabela virtualizada de issues
-  - [ ] Colunas: linha, coluna, valor, severidade, mensagem
-  - [ ] Filtros: errors only, warnings only, por coluna
-  - [ ] Badge de contagem por severidade
-- [ ] `src/components/steps/DataValidation.tsx`
-  - [ ] Executa validação ao montar
-  - [ ] Progress bar durante validação
-  - [ ] Sumário: X erros, Y avisos, Z linhas válidas de N total
-  - [ ] `ValidationTable` com detalhes
-  - [ ] Pode avançar com warnings, mas não com errors (ou config via prop)
-  - [ ] Botão "Revalidar" após correções na planilha
-- [ ] **Teste**: `src/lib/__tests__/validator.test.ts`
-  - [ ] Cada tipo de validator
-  - [ ] Type coercion
-  - [ ] Custom validator
-- [ ] **Teste**: `src/components/steps/__tests__/DataValidation.test.tsx`
-  - [ ] Mostra sumário correto
-  - [ ] Bloqueia avanço com erros
+- [x] `src/lib/type-coercion.ts`
+  - [x] `coerceToNumber(value)`: string → number, lidar com vírgula decimal pt-BR
+  - [x] `coerceToDate(value)`: string → Date, múltiplos formatos (DD/MM/YYYY, YYYY-MM-DD, etc.)
+  - [x] `coerceToBoolean(value)`: "sim"/"não", "yes"/"no", "true"/"false", "1"/"0"
+- [x] `src/lib/validator.ts`
+  - [x] Validators built-in: required, regex, min, max, minLength, maxLength, enum
+  - [x] Suporte a `validate` custom function
+  - [x] Type checking com coerção
+  - [x] Orquestração: envia dados em chunks para o Worker, agrega resultados
+- [x] `src/workers/validator.worker.ts`
+  - [x] Recebe chunk de linhas + schema (TargetColumn[]) + mappings
+  - [x] Aplica validators por célula
+  - [x] Retorna `ValidationIssue[]` + progresso
+- [x] `src/hooks/use-validator.ts`
+  - [x] Hook: `validate()`, `isValidating`, `progress`, `result`
+- [x] `src/components/ui/ValidationTable.tsx`
+  - [x] Tabela virtualizada de issues
+  - [x] Colunas: linha, coluna, valor, severidade, mensagem
+  - [x] Filtros: errors only, warnings only, por coluna
+  - [x] Badge de contagem por severidade
+- [x] `src/components/steps/DataValidation.tsx`
+  - [x] Executa validação ao montar
+  - [x] Progress bar durante validação
+  - [x] Sumário: X erros, Y avisos, Z linhas válidas de N total
+  - [x] `ValidationTable` com detalhes
+  - [x] Pode avançar com warnings, mas não com errors (ou config via prop)
+  - [x] Botão "Revalidar" após correções na planilha
+- [x] **Teste**: `src/lib/__tests__/validator.test.ts`
+  - [x] Cada tipo de validator
+  - [x] Type coercion
+  - [x] Custom validator
+- [x] **Teste**: `src/components/steps/__tests__/DataValidation.test.tsx`
+  - [x] Mostra sumário correto
+  - [x] Bloqueia avanço com erros
 
 ---
 
