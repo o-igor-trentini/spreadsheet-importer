@@ -16,3 +16,15 @@ export type {
 } from './importer'
 
 export type { ImporterState, ImporterActions, ImporterStore } from './store'
+
+export type {
+  ParsePreviewRequest,
+  ExtractDataRequest,
+  WorkerRequest,
+  SheetInfo,
+  ParsePreviewResponse,
+  ExtractDataChunkResponse,
+  ExtractDataDoneResponse,
+  WorkerErrorResponse,
+  WorkerResponse,
+} from './worker'

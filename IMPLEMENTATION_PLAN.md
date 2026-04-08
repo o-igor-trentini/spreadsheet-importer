@@ -109,25 +109,25 @@ State management com persistência para salvar progresso.
 
 Parsing de planilhas em Web Worker para não travar a UI.
 
-- [ ] `src/workers/parser.worker.ts`
-  - [ ] Recebe `ArrayBuffer` via `postMessage`
-  - [ ] Usa `XLSX.read(data, { type: 'array' })` para parsear
-  - [ ] Extrai: nomes das sheets, headers das colunas, sample rows (N primeiras), total de linhas
-  - [ ] Para extração completa (validação/submit): recebe mappings, extrai apenas colunas mapeadas, envia em chunks de 5000 linhas
-  - [ ] Protocolo de mensagens tipado (WorkerRequest/WorkerResponse)
-  - [ ] Tratamento de erros (arquivo inválido, formato não suportado)
-- [ ] `src/lib/parser.ts`
-  - [ ] Orquestração no main thread
-  - [ ] Instancia o Worker via `new Worker(new URL(...))`
-  - [ ] Fallback para main thread se Worker não disponível
-  - [ ] Retorna Promise que resolve com resultado do parsing
-- [ ] `src/hooks/use-file-parser.ts`
-  - [ ] Hook que expõe: `parseFile(file: File)`, `isProcessing`, `error`
-  - [ ] Gerencia lifecycle do Worker (criação/terminação)
-- [ ] **Teste**: `src/workers/__tests__/parser-logic.test.ts`
-  - [ ] Lógica de parsing extraída em funções puras e testada separadamente
-  - [ ] Testa CSV, XLSX
-  - [ ] Testa extração de headers e sample values
+- [x] `src/workers/parser.worker.ts`
+  - [x] Recebe `ArrayBuffer` via `postMessage`
+  - [x] Usa `XLSX.read(data, { type: 'array' })` para parsear
+  - [x] Extrai: nomes das sheets, headers das colunas, sample rows (N primeiras), total de linhas
+  - [x] Para extração completa (validação/submit): recebe mappings, extrai apenas colunas mapeadas, envia em chunks de 5000 linhas
+  - [x] Protocolo de mensagens tipado (WorkerRequest/WorkerResponse)
+  - [x] Tratamento de erros (arquivo inválido, formato não suportado)
+- [x] `src/lib/parser.ts`
+  - [x] Orquestração no main thread
+  - [x] Instancia o Worker via `new Worker(new URL(...))`
+  - [x] Fallback para main thread se Worker não disponível
+  - [x] Retorna Promise que resolve com resultado do parsing
+- [x] `src/hooks/use-file-parser.ts`
+  - [x] Hook que expõe: `parseFile(file: File)`, `isProcessing`, `error`
+  - [x] Gerencia lifecycle do Worker (criação/terminação)
+- [x] **Teste**: `src/workers/__tests__/parser-logic.test.ts`
+  - [x] Lógica de parsing extraída em funções puras e testada separadamente
+  - [x] Testa CSV, XLSX
+  - [x] Testa extração de headers e sample values
 
 ---
 
