@@ -179,30 +179,30 @@ Sugestão automática de mapeamento por fuzzy matching.
 
 Interface para mapear colunas fonte → colunas alvo.
 
-- [ ] `src/components/ui/DataPreview.tsx`
-  - [ ] Tabela virtualizada com `@tanstack/react-virtual`
-  - [ ] Mostra N primeiras linhas da planilha importada
-  - [ ] Headers da planilha como cabeçalho da tabela
-  - [ ] Scroll horizontal para planilhas largas
-- [ ] `src/components/ui/MappingSelect.tsx`
-  - [ ] Dropdown (Radix Select) com lista de colunas fonte disponíveis
-  - [ ] Opção "Não mapear" para colunas opcionais
-  - [ ] Sample values como hint no dropdown
-  - [ ] Colunas já mapeadas aparecem desabilitadas/marcadas
-- [ ] `src/components/ui/MappingRow.tsx`
-  - [ ] Uma linha por `TargetColumn`: label, badge required/optional, `MappingSelect`, confidence badge se auto-mapeado
-- [ ] `src/components/steps/ColumnMapping.tsx`
-  - [ ] Executa auto-mapper ao montar (se não houver mappings salvos)
-  - [ ] Lista de `MappingRow` para cada coluna alvo
-  - [ ] `DataPreview` acima para referência visual
-  - [ ] Validação: todas as colunas required devem estar mapeadas antes de avançar
-  - [ ] Botão "Próximo" habilitado só quando válido
-  - [ ] Salva mappings na store a cada mudança
-- [ ] **Teste**: `src/components/steps/__tests__/ColumnMapping.test.tsx`
-  - [ ] Renderiza todas as target columns
-  - [ ] Auto-mapping preenche selects
-  - [ ] Não permite avançar sem colunas required mapeadas
-  - [ ] Mudança manual atualiza a store
+- [x] `src/components/ui/DataPreview.tsx`
+  - [x] Tabela virtualizada com `@tanstack/react-virtual`
+  - [x] Mostra N primeiras linhas da planilha importada
+  - [x] Headers da planilha como cabeçalho da tabela
+  - [x] Scroll horizontal para planilhas largas
+- [x] `src/components/ui/MappingSelect.tsx`
+  - [x] Dropdown (Radix Select) com lista de colunas fonte disponíveis
+  - [x] Opção "Não mapear" para colunas opcionais
+  - [x] Sample values como hint no dropdown
+  - [x] Colunas já mapeadas aparecem desabilitadas/marcadas
+- [x] `src/components/ui/MappingRow.tsx`
+  - [x] Uma linha por `TargetColumn`: label, badge required/optional, `MappingSelect`, confidence badge se auto-mapeado
+- [x] `src/components/steps/ColumnMapping.tsx`
+  - [x] Executa auto-mapper ao montar (se não houver mappings salvos)
+  - [x] Lista de `MappingRow` para cada coluna alvo
+  - [x] `DataPreview` acima para referência visual
+  - [x] Validação: todas as colunas required devem estar mapeadas antes de avançar
+  - [x] Botão "Próximo" habilitado só quando válido
+  - [x] Salva mappings na store a cada mudança
+- [x] **Teste**: `src/components/steps/__tests__/ColumnMapping.test.tsx`
+  - [x] Renderiza todas as target columns
+  - [x] Auto-mapping preenche selects
+  - [x] Não permite avançar sem colunas required mapeadas
+  - [x] Mudança manual atualiza a store
 
 ---
 
