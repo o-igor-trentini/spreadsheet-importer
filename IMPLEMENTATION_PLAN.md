@@ -158,20 +158,20 @@ Interface de upload com drag-and-drop.
 
 Sugestão automática de mapeamento por fuzzy matching.
 
-- [ ] `src/lib/auto-mapper.ts`
-  - [ ] Normalização de headers: lowercase, trim, remover acentos/caracteres especiais
-  - [ ] Tabela de abreviações comuns: `dt` → `date`, `num` → `number`, `orig` → `origin`, `dest` → `destination`, `mot` → `motorista`
-  - [ ] Usar `Fuse.js` para fuzzy search de cada `TargetColumn.label` contra `SourceColumn.header`
-  - [ ] Threshold de confiança (ex: 0.6) — abaixo disso, não sugere
-  - [ ] Match exato = confidence 1.0
-  - [ ] Evitar mapeamentos duplicados (uma source só mapeia para um target)
-  - [ ] Retorna `ColumnMapping[]` com scores de confiança
-- [ ] **Teste**: `src/lib/__tests__/auto-mapper.test.ts`
-  - [ ] Match exato ("Origem" → "Origem")
-  - [ ] Match fuzzy ("orig" → "Origem")
-  - [ ] Match com abreviação ("dt_saida" → "Data de Saída")
-  - [ ] Não duplica mapeamentos
-  - [ ] Abaixo do threshold não sugere
+- [x] `src/lib/auto-mapper.ts`
+  - [x] Normalização de headers: lowercase, trim, remover acentos/caracteres especiais
+  - [x] Tabela de abreviações comuns: `dt` → `date`, `num` → `number`, `orig` → `origin`, `dest` → `destination`, `mot` → `motorista`
+  - [x] Usar `Fuse.js` para fuzzy search de cada `TargetColumn.label` contra `SourceColumn.header`
+  - [x] Threshold de confiança (ex: 0.6) — abaixo disso, não sugere
+  - [x] Match exato = confidence 1.0
+  - [x] Evitar mapeamentos duplicados (uma source só mapeia para um target)
+  - [x] Retorna `ColumnMapping[]` com scores de confiança
+- [x] **Teste**: `src/lib/__tests__/auto-mapper.test.ts`
+  - [x] Match exato ("Origem" → "Origem")
+  - [x] Match fuzzy ("orig" → "Origem")
+  - [x] Match com abreviação ("dt_saida" → "Data de Saída")
+  - [x] Não duplica mapeamentos
+  - [x] Abaixo do threshold não sugere
 
 ---
 
