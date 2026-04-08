@@ -251,36 +251,36 @@ Validação em background com feedback visual.
 
 Container do wizard e etapa final de revisão.
 
-- [ ] `src/components/ui/StepIndicator.tsx`
-  - [ ] Stepper horizontal: upload → mapping → validation → review
-  - [ ] Estado visual: completed, current, upcoming
-  - [ ] Clicável para navegar a steps já completados
-- [ ] `src/components/ui/ResumeSessionBanner.tsx`
-  - [ ] Detecta estado persistido no localStorage
-  - [ ] Mostra: "Importação anterior encontrada ({fileName}). Continuar de onde parou?"
-  - [ ] Botões: "Continuar" (restaura estado) / "Nova importação" (reset)
-- [ ] `src/components/steps/ReviewSubmit.tsx`
-  - [ ] Resumo do mapeamento (read-only): coluna origem → coluna destino
-  - [ ] Preview dos dados transformados (virtualizado)
-  - [ ] Contagem: N linhas serão importadas
-  - [ ] Botão "Importar" que chama `onComplete` com os dados processados
-  - [ ] Estado de loading durante processamento/envio
-- [ ] `src/components/WizardShell.tsx`
-  - [ ] Lê step da store, renderiza componente correspondente
-  - [ ] Renderiza `StepIndicator` no topo
-  - [ ] Botões de navegação (Voltar/Próximo) padronizados
-  - [ ] Renderiza `ResumeSessionBanner` se houver estado salvo
-- [ ] `src/components/SpreadsheetImporter.tsx`
-  - [ ] Componente raiz — API pública
-  - [ ] Recebe props, cria store, renderiza `StoreProvider` > `WizardShell`
-  - [ ] Passa `columns`, callbacks, configurações para a store/context
-- [ ] `src/index.ts`
-  - [ ] Exporta `SpreadsheetImporter` (componente)
-  - [ ] Exporta todos os tipos públicos
-  - [ ] Exporta validators para uso standalone se necessário
-- [ ] **Teste**: `src/components/__tests__/SpreadsheetImporter.test.tsx`
-  - [ ] Renderiza sem crash
-  - [ ] Fluxo completo: upload → map → validate → submit
+- [x] `src/components/ui/StepIndicator.tsx`
+  - [x] Stepper horizontal: upload → mapping → validation → review
+  - [x] Estado visual: completed, current, upcoming
+  - [x] Clicável para navegar a steps já completados
+- [x] `src/components/ui/ResumeSessionBanner.tsx`
+  - [x] Detecta estado persistido no localStorage
+  - [x] Mostra: "Importação anterior encontrada ({fileName}). Continuar de onde parou?"
+  - [x] Botões: "Continuar" (restaura estado) / "Nova importação" (reset)
+- [x] `src/components/steps/ReviewSubmit.tsx`
+  - [x] Resumo do mapeamento (read-only): coluna origem → coluna destino
+  - [x] Preview dos dados transformados (virtualizado)
+  - [x] Contagem: N linhas serão importadas
+  - [x] Botão "Importar" que chama `onComplete` com os dados processados
+  - [x] Estado de loading durante processamento/envio
+- [x] `src/components/WizardShell.tsx`
+  - [x] Lê step da store, renderiza componente correspondente
+  - [x] Renderiza `StepIndicator` no topo
+  - [x] Botões de navegação (Voltar/Próximo) padronizados
+  - [x] Renderiza `ResumeSessionBanner` se houver estado salvo
+- [x] `src/components/SpreadsheetImporter.tsx`
+  - [x] Componente raiz — API pública
+  - [x] Recebe props, cria store, renderiza `StoreProvider` > `WizardShell`
+  - [x] Passa `columns`, callbacks, configurações para a store/context
+- [x] `src/index.ts`
+  - [x] Exporta `SpreadsheetImporter` (componente)
+  - [x] Exporta todos os tipos públicos
+  - [x] Exporta validators para uso standalone se necessário
+- [x] **Teste**: `src/components/__tests__/SpreadsheetImporter.test.tsx`
+  - [x] Renderiza sem crash
+  - [x] Fluxo completo: upload → map → validate → submit
 
 ---
 
