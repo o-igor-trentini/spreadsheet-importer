@@ -28,5 +28,5 @@
       "@ui/*": ["./src/components/ui/*"]
     }
   },
-  "include": ["src", "dev"]
+  "include": ["src"]
 }

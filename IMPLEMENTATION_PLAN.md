@@ -288,9 +288,9 @@ Container do wizard e etapa final de revisão.
 
 Finalização, app demo e documentação.
 
-- [ ] `dev/App.tsx` — app demo com exemplo de importação de viagens
-  - [ ] Configuração de colunas de exemplo (origem, destino, data, motorista)
-  - [ ] `onComplete` que mostra os dados no console / toast
+- [x] `dev/App.tsx` — app demo com exemplo de importação de viagens
+  - [x] Configuração de colunas de exemplo (origem, destino, data, motorista)
+  - [x] `onComplete` que mostra os dados no console / toast
 - [ ] Teste de performance manual
   - [ ] Upload de planilha com 50k+ linhas
   - [ ] Verificar que UI permanece responsiva
@@ -299,14 +299,14 @@ Finalização, app demo e documentação.
   - [ ] Iniciar importação, parar no step de mapping
   - [ ] Recarregar página → banner de resume deve aparecer
   - [ ] Clicar "Continuar" → deve restaurar mappings
-- [ ] Build da biblioteca
-  - [ ] `npm run build` gera `dist/index.js`, `dist/index.d.ts`, `dist/style.css`
+- [x] Build da biblioteca
+  - [x] `npm run build` gera `dist/index.js`, `dist/index.d.ts`, `dist/style.css`
   - [ ] `npm pack` e testar instalação em projeto separado
-- [ ] README.md com documentação
-  - [ ] Instalação
-  - [ ] Uso básico
-  - [ ] API completa (props, tipos)
-  - [ ] Exemplos para diferentes casos (viagens, posições, etc.)
+- [x] README.md com documentação
+  - [x] Instalação
+  - [x] Uso básico
+  - [x] API completa (props, tipos)
+  - [x] Exemplos para diferentes casos (viagens, posições, etc.)
 
 ---
 

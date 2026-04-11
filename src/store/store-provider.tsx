@@ -1,11 +1,12 @@
-import { createContext, useRef, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import {
   createImporterStore,
   type ImporterStoreApi,
 } from './importer-store'
+import { ImporterStoreContext } from './importer-store-context'
 import type { StateStorage } from 'zustand/middleware'
 
-export const ImporterStoreContext = createContext<ImporterStoreApi | null>(null)
+export { ImporterStoreContext } from './importer-store-context'
 
 export interface StoreProviderProps {
   children: ReactNode
@@ -18,14 +19,12 @@ export function StoreProvider({
   sessionKey,
   storage,
 }: StoreProviderProps) {
-  const storeRef = useRef<ImporterStoreApi | null>(null)
-
-  if (storeRef.current === null) {
-    storeRef.current = createImporterStore({ sessionKey, storage })
-  }
+  const [store] = useState<ImporterStoreApi>(() =>
+    createImporterStore({ sessionKey, storage }),
+  )
 
   return (
-    <ImporterStoreContext.Provider value={storeRef.current}>
+    <ImporterStoreContext.Provider value={store}>
       {children}
     </ImporterStoreContext.Provider>
   )

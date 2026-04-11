@@ -1,3 +1,5 @@
+import './styles/importer.css'
+
 export { SpreadsheetImporter } from './components/SpreadsheetImporter'
 
 export type {

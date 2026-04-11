@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react'
+import { useEffect, useCallback, useMemo, useRef } from 'react'
 import * as Progress from '@radix-ui/react-progress'
 import { CheckCircle2, XCircle, AlertTriangle } from 'lucide-react'
 import { ValidationTable } from '@/components/ui/ValidationTable'
@@ -23,6 +23,7 @@ export function DataValidation({
   const setValidationResult = useImporterStore((s) => s.setValidationResult)
 
   const { validate, isValidating, progress, result } = useValidator()
+  const hasRun = useRef(false)
 
   const runValidation = useCallback(async () => {
     if (!fileData) return
@@ -30,12 +31,21 @@ export function DataValidation({
     setValidationResult(res)
   }, [fileData, columns, mappings, validate, setValidationResult])
 
-  // Run validation on mount
+  // Run validation on mount (once)
   useEffect(() => {
-    if (!validationResult && fileData) {
+    if (!hasRun.current && !validationResult && fileData) {
+      hasRun.current = true
       runValidation()
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [fileData, validationResult, runValidation])
+
+  const columnLabels = useMemo(() => {
+    const map: Record<string, string> = {}
+    for (const col of columns) {
+      map[col.key] = col.label
+    }
+    return map
+  }, [columns])
 
   const displayResult = result ?? validationResult
   const canProceed = displayResult ? displayResult.errorCount === 0 : false
@@ -62,6 +72,14 @@ export function DataValidation({
           </Progress.Root>
           <p className="text-muted-foreground text-center text-sm">
             Validando... {progress}%
+          </p>
+        </div>
+      )}
+
+      {!isValidating && !displayResult && !fileData && (
+        <div className="rounded-lg border p-4 text-center">
+          <p className="text-muted-foreground text-sm">
+            Dados do arquivo não disponíveis. Volte ao passo de upload.
           </p>
         </div>
       )}
@@ -100,7 +118,7 @@ export function DataValidation({
           </div>
 
           {displayResult.issues.length > 0 && (
-            <ValidationTable issues={displayResult.issues} />
+            <ValidationTable issues={displayResult.issues} columnLabels={columnLabels} />
           )}
         </>
       )}
@@ -118,10 +136,11 @@ export function DataValidation({
           <button
             type="button"
             onClick={() => {
+              hasRun.current = false
               setValidationResult(null)
               runValidation()
             }}
-            disabled={isValidating}
+            disabled={isValidating || !fileData}
             className="border-input bg-background hover:bg-accent hover:text-accent-foreground rounded-md border px-4 py-2 text-sm font-medium disabled:opacity-50"
           >
             Revalidar

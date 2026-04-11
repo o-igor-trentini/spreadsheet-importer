@@ -6,17 +6,26 @@ import type { ValidationIssue, ValidationSeverity } from '@/types/validation'
 
 export interface ValidationTableProps {
   issues: ValidationIssue[]
+  columnLabels?: Record<string, string>
   className?: string
 }
 
 type SeverityFilter = 'all' | ValidationSeverity
 
-export function ValidationTable({ issues, className }: ValidationTableProps) {
+const COL_GRID = 'grid-cols-[60px_120px_160px_90px_1fr]'
+
+export function ValidationTable({
+  issues,
+  columnLabels = {},
+  className,
+}: ValidationTableProps) {
   const [severityFilter, setSeverityFilter] = useState<SeverityFilter>('all')
   const [columnFilter, setColumnFilter] = useState<string>('all')
   const parentRef = useRef<HTMLDivElement>(null)
 
-  const columns = useMemo(() => {
+  const resolveLabel = (key: string) => columnLabels[key] ?? key
+
+  const columnKeys = useMemo(() => {
     const unique = new Set(issues.map((i) => i.columnKey))
     return Array.from(unique).sort()
   }, [issues])
@@ -40,10 +49,12 @@ export function ValidationTable({ issues, className }: ValidationTableProps) {
     [issues],
   )
 
+  const filteredCount = filtered.length
+
   const rowVirtualizer = useVirtualizer({
     count: filtered.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 40,
+    estimateSize: () => 36,
     overscan: 10,
   })
 
@@ -89,38 +100,48 @@ export function ValidationTable({ issues, className }: ValidationTableProps) {
           </button>
         </div>
 
-        {columns.length > 1 && (
+        {columnKeys.length > 1 && (
           <select
             value={columnFilter}
             onChange={(e) => setColumnFilter(e.target.value)}
             className="border-input bg-background rounded-md border px-2 py-1 text-xs"
           >
             <option value="all">Todas as colunas</option>
-            {columns.map((col) => (
-              <option key={col} value={col}>
-                {col}
+            {columnKeys.map((key) => (
+              <option key={key} value={key}>
+                {resolveLabel(key)}
               </option>
             ))}
           </select>
         )}
       </div>
 
-      <div
-        ref={parentRef}
-        className="overflow-auto rounded-md border"
-        style={{ maxHeight: 400 }}
-      >
-        <table className="w-full text-sm">
-          <thead className="bg-muted/50 sticky top-0">
-            <tr>
-              <th className="px-3 py-2 text-left font-medium">Linha</th>
-              <th className="px-3 py-2 text-left font-medium">Coluna</th>
-              <th className="px-3 py-2 text-left font-medium">Valor</th>
-              <th className="px-3 py-2 text-left font-medium">Severidade</th>
-              <th className="px-3 py-2 text-left font-medium">Mensagem</th>
-            </tr>
-          </thead>
-          <tbody
+      {filteredCount !== issues.length && (
+        <p className="text-muted-foreground text-xs">
+          Exibindo {filteredCount} de {issues.length} problemas
+        </p>
+      )}
+
+      <div className="rounded-md border">
+        <div
+          className={cn(
+            'bg-muted/80 grid gap-0 border-b px-3 py-2 text-xs font-medium text-muted-foreground',
+            COL_GRID,
+          )}
+        >
+          <span>Linha</span>
+          <span>Coluna</span>
+          <span>Valor</span>
+          <span>Severidade</span>
+          <span>Mensagem</span>
+        </div>
+
+        <div
+          ref={parentRef}
+          className="overflow-auto"
+          style={{ maxHeight: 360 }}
+        >
+          <div
             style={{
               height: `${rowVirtualizer.getTotalSize()}px`,
               position: 'relative',
@@ -129,9 +150,12 @@ export function ValidationTable({ issues, className }: ValidationTableProps) {
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const issue = filtered[virtualRow.index]
               return (
-                <tr
+                <div
                   key={virtualRow.index}
-                  className="border-b"
+                  className={cn(
+                    'grid items-center gap-0 border-b px-3 py-2 text-sm',
+                    COL_GRID,
+                  )}
                   style={{
                     position: 'absolute',
                     top: 0,
@@ -141,16 +165,16 @@ export function ValidationTable({ issues, className }: ValidationTableProps) {
                     transform: `translateY(${virtualRow.start}px)`,
                   }}
                 >
-                  <td className="px-3 py-2">{issue.row}</td>
-                  <td className="px-3 py-2">{issue.columnKey}</td>
-                  <td className="text-muted-foreground max-w-[200px] truncate px-3 py-2">
+                  <span>{issue.row}</span>
+                  <span className="truncate">{resolveLabel(issue.columnKey)}</span>
+                  <span className="truncate text-muted-foreground">
                     {issue.value === null || issue.value === undefined
                       ? '(vazio)'
                       : String(issue.value)}
-                  </td>
-                  <td className="px-3 py-2">
+                  </span>
+                  <span>
                     {issue.severity === 'error' ? (
-                      <span className="text-destructive inline-flex items-center gap-1 text-xs">
+                      <span className="inline-flex items-center gap-1 text-xs text-destructive">
                         <AlertCircle className="h-3 w-3" />
                         erro
                       </span>
@@ -160,19 +184,19 @@ export function ValidationTable({ issues, className }: ValidationTableProps) {
                         aviso
                       </span>
                     )}
-                  </td>
-                  <td className="px-3 py-2">{issue.message}</td>
-                </tr>
+                  </span>
+                  <span className="truncate">{issue.message}</span>
+                </div>
               )
             })}
-          </tbody>
-        </table>
+          </div>
 
-        {filtered.length === 0 && (
-          <p className="text-muted-foreground py-8 text-center text-sm">
-            Nenhum problema encontrado.
-          </p>
-        )}
+          {filtered.length === 0 && (
+            <p className="py-8 text-center text-sm text-muted-foreground">
+              Nenhum problema encontrado.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   )

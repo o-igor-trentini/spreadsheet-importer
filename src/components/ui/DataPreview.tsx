@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-import { useVirtualizer } from '@tanstack/react-virtual'
 import { cn } from '@/lib/utils'
 import type { SourceColumn } from '@/types/column'
 
@@ -14,72 +12,41 @@ export function DataPreview({
   previewData,
   className,
 }: DataPreviewProps) {
-  const parentRef = useRef<HTMLDivElement>(null)
-
-  const rowVirtualizer = useVirtualizer({
-    count: previewData.length,
-    getScrollElement: () => parentRef.current,
-    estimateSize: () => 36,
-    overscan: 5,
-  })
-
   if (sourceColumns.length === 0) return null
 
   return (
     <div
-      ref={parentRef}
       className={cn(
-        'overflow-auto rounded-md border',
+        'max-h-[300px] overflow-auto rounded-md border',
         className,
       )}
-      style={{ maxHeight: 300 }}
     >
-      <table className="w-full text-sm">
-        <thead className="bg-muted/50 sticky top-0">
+      <table className="w-full border-collapse text-sm">
+        <thead className="bg-muted/80 sticky top-0 z-10">
           <tr>
             {sourceColumns.map((col) => (
               <th
                 key={col.index}
-                className="text-muted-foreground whitespace-nowrap px-3 py-2 text-left font-medium"
+                className="bg-muted/80 whitespace-nowrap border-b px-3 py-2 text-left text-xs font-medium text-muted-foreground"
               >
                 {col.header}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody
-          style={{
-            height: `${rowVirtualizer.getTotalSize()}px`,
-            position: 'relative',
-          }}
-        >
-          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-            const row = previewData[virtualRow.index]
-            return (
-              <tr
-                key={virtualRow.index}
-                data-index={virtualRow.index}
-                className="border-b"
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: `${virtualRow.size}px`,
-                  transform: `translateY(${virtualRow.start}px)`,
-                }}
-              >
-                {sourceColumns.map((col) => (
-                  <td
-                    key={col.index}
-                    className="whitespace-nowrap px-3 py-2"
-                  >
-                    {row?.[col.index] ?? ''}
-                  </td>
-                ))}
-              </tr>
-            )
-          })}
+        <tbody>
+          {previewData.map((row, rowIndex) => (
+            <tr key={rowIndex} className="border-b last:border-b-0">
+              {sourceColumns.map((col) => (
+                <td
+                  key={col.index}
+                  className="max-w-[200px] truncate whitespace-nowrap px-3 py-2"
+                >
+                  {row[col.index] ?? ''}
+                </td>
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

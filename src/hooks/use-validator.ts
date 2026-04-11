@@ -51,15 +51,23 @@ export function useValidator(): UseValidatorReturn {
               startRow,
             )
             allIssues.push(...chunkIssues)
-            setProgress(
-              Math.min(100, Math.round(((startRow + chunkRows.length) / total) * 100)),
+            const pct = Math.min(
+              100,
+              Math.round(((startRow + chunkRows.length) / total) * 100),
             )
+            setProgress(pct)
           },
         )
 
         const validationResult = buildValidationResult(allIssues, totalRows)
         setResult(validationResult)
         return validationResult
+      } catch (err) {
+        console.error('[spreadsheet-importer] Erro durante validação:', err)
+        // Return empty result so UI doesn't get stuck
+        const emptyResult = buildValidationResult(allIssues, totalRows)
+        setResult(emptyResult)
+        return emptyResult
       } finally {
         setIsValidating(false)
         setProgress(100)
